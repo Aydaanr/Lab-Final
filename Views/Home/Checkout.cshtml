@@ -1,0 +1,28 @@
+<!-- Views/Home/Checkout.cshtml -->
+<h2>Checkout</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var shoppingCart in ViewBag.ShoppingCarts)
+        {
+            <tr>
+                <td>@shoppingCart.Pet.Name</td>
+                <td>@shoppingCart.Quantity</td>
+                <td>$@shoppingCart.Pet.Price</td>
+                <td>$@(shoppingCart.Pet.Price * shoppingCart.Quantity)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>Total Price: $@ViewBag.TotalPrice</p>
+
+<button type="submit" class="btn btn-primary">Proceed</button>

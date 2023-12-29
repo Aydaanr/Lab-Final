@@ -1,0 +1,153 @@
+﻿@model UserSelectionViewModel
+
+@{
+    ViewData["Title"] = "Pet List";
+}
+
+<div class="container-fluid">
+    <div class="row">
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+        <form asp-action="Index" method="get">
+            <div class="form-group">
+                <label for="NameFilter">Name:</label>
+                <input type="text" id="NameFilter" name="NameFilter" value="@ViewData["NameFilter"]" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="TownFilter">Town:</label>
+                <input type="text" id="TownFilter" name="TownFilter" value="@ViewData["TownFilter"]" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="BreedFilter">Breed:</label>
+                <input type="text" id="BreedFilter" name="BreedFilter" value="@ViewData["BreedFilter"]" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="TypeFilter">Type:</label>
+                <select id="TypeFilter" name="TypeFilter" class="form-control">
+                    <option value="">-- All Animals --</option>
+                    @foreach (var type in Model.Types)
+                    {
+                        <option value="@type" selected="@(ViewData["TypeFilter"]?.ToString() == type ? "selected" : null)">@type</option>
+                    }
+                </select>                                  
+            </div>
+
+            <div class="form-group">
+                <label for="SizeFilter">Size:</label>
+                <select id="SizeFilter" name="SizeFilter" class="form-control">
+                    <option value="">-- All Sizes --</option>
+                    @foreach (var type in Model.Sizes)
+                    {
+                        <option value="@type" selected="@(ViewData["SizeFilter"]?.ToString() == type ? "selected" : null)">@type</option>
+                    }
+                </select>                                  
+
+            </div>
+
+            <div class="form-group">
+                <label for="ColorFilter">Color:</label>
+                <select id="ColorFilter" name="ColorFilter" class="form-control">
+                    <option value="">-- All Colors --</option>
+                    @foreach (var type in Model.Colors)
+                    {
+                        <option value="@type" selected="@(ViewData["ColorFilter"]?.ToString() == type ? "selected" : null)">@type</option>
+                    }
+                </select>                                  
+
+            </div>
+
+            <div class="form-group">
+                <label for="GenderFilter">Gender:</label>
+                <select id="GenderFilter" name="GenderFilter" class="form-control">
+                    <option value="">-- All Genders --</option>
+                    @foreach (var type in Model.Genders)
+                    {
+                        <option value="@type" selected="@(ViewData["TypeFilter"]?.ToString() == type ? "selected" : null)">@type</option>
+                    }
+                </select>                                  
+            </div>
+
+            <div class="form-group">
+                <label for="AgeFilter">Age:</label>
+                <select id="AgeFilter" name="AgeFilter" class="form-control">
+                    <option value="">-- All Ages --</option>
+                    @foreach (var type in Model.Ages)
+                    {
+                        <option value="@type" selected="@(ViewData["AgeFilter"]?.ToString() == type ? "selected" : null)">@type</option>
+                    }
+                </select>                                  
+            </div>
+
+            <div class="form-group">
+                <label for="AdoptionTypeFilter">Adoption Type:</label>
+                <select id="AdoptionTypeFilter" name="AdoptionTypeFilter" class="form-control">
+                    <option value="">-- All Adoption Types --</option>
+                    @foreach (var type in Model.AdoptionTypes)
+                    {
+                        <option value="@type" selected="@(ViewData["AdoptionTypeFilter"]?.ToString() == type ? "selected" : null)">@type</option>
+                    }
+                </select>                                  
+
+            </div>
+
+            <div class="form-group">
+                <label for="CoatLengthFilter">Coat Length:</label>
+                <select id="CoatLengthFilter" name="CoatLengthFilter" class="form-control">
+                    <option value="">-- All Coat Length --</option>
+                    @foreach (var type in Model.CoatLengths)
+                    {
+                        <option value="@type" selected="@(ViewData["CoatLengthFilter"]?.ToString() == type ? "selected" : null)">@type</option>
+                    }
+                </select>                                                                      
+            </div>
+
+            <div class="form-group">
+                <label for="GoodWithFilter">Good With Others:</label>
+                <select id="GoodWithFilter" name="GoodWithFilter" class="form-control">
+                    <option value="">-- All Good Filters --</option>
+                    @foreach (var type in Model.GoodWithOptions)
+                    {
+                        <option value="@type" selected="@(ViewData["GoodWithFilter"]?.ToString() == type ? "selected" : null)">@type</option>
+                    }
+                </select>                                                                      
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary mt-4">Apply Filters</button>
+            </div>
+        </form>
+    </div>
+</nav>
+
+
+    <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
+        <div class="text-center">
+            <div class="row">
+                @foreach (var pet in Model.Pets)
+                {
+                    <div class="col-md-3">
+                        <div class="card mb-3">
+                            <img src="@pet.ImageUrl" alt="@pet.Name" class="card-img-top pet-image" alt="Pet">
+                            <div class="card-body">
+                                <h5 class="card-title">@pet.Name</h5>
+                                <p class="card-text">Type: @pet.Type</p>
+                                <p class="card-text">Size: @pet.Size</p>
+                                <p class="card-text">Color: @pet.Color</p>
+                                <p class="card-text">Gender: @pet.Gender</p>
+                                <p class="card-text">Breed: @pet.Breed</p>
+                                <p class="card-text">Age: @pet.Age</p>
+                                <p class="card-text">Adoption Type: @pet.AdoptionType</p>
+                                <!-- Add other properties as needed... -->
+                                <a href="@Url.Action("Detail", new { id = pet.Id })" class="btn btn-primary">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </main>
+    </div>
+</div>

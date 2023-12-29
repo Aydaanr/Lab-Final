@@ -1,0 +1,28 @@
+<!-- Views/Home/Payment.cshtml -->
+@model List<ShoppingCart>
+
+<h2>Payment</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Clothing Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Pet.Name</td>
+                <td>@item.Quantity</td>
+                <td>@(item.Quantity * item.Pet.Price)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>Total: @Model.Sum(item => item.Quantity * item.Pet.Price)</p>
+
+<a asp-controller="Home" asp-action="ConfirmPayment">Confirm Payment</a>

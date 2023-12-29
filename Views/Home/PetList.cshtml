@@ -1,0 +1,61 @@
+<!-- Views/Home/PetList.cshtml -->
+@model List<Pet>
+
+<h2>Pets</h2>
+
+<form method="get" asp-action="Index">
+    <label for="nameFilter">Name:</label>
+    <input type="text" name="nameFilter" value="@ViewBag.NameFilter" />
+    <label for="typeFilter">Type:</label>
+    <input type="text" name="typeFilter" value="@ViewBag.TypeFilter" />
+    <label for="colorFilter">Color:</label>
+    <input type="text" name="colorFilter" value="@ViewBag.ColorFilter" />
+    <label for="sizeFilter">Size:</label>
+    <input type="text" name="sizeFilter" value="@ViewBag.SizeFilter" />
+    <label for="genderFilter">Gender:</label>
+    <input type="text" name="genderFilter" value="@ViewBag.GenderFilter" />
+    <label for="breedFilter">Breed:</label>
+    <input type="text" name="breedFilter" value="@ViewBag.BreedFilter" />
+    <label for="ageFilter">Age:</label>
+    <input type="text" name="ageFilter" value="@ViewBag.AgeFilter" />
+    <label for="adoptionTypeFilter">Adoption Type:</label>
+    <input type="text" name="adoptionTypeFilter" value="@ViewBag.AdoptionTypeFilter" />
+    <label for="sizeFilter">Size:</label>
+    <input type="text" name="sizeFilter" value="@ViewBag.SizeFilter" />
+    <!-- Add other filter inputs as needed -->
+    <button type="submit">Apply Filters</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Color</th>
+            <th>Size</th>
+            <th>Gender</th>
+            <th>Breed</th>
+            <th>Age</th>
+            <th>Adoption Type</th>
+            <!-- Add other columns as needed -->
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pet in Model)
+        {
+            <tr>
+                <td>@pet.Name</td>
+                <td>@pet.Type</td>
+                <td>@pet.Color</td>
+                <td>@pet.Size</td>
+                <td>@pet.Gender</td>
+                <td>@pet.Breed</td>
+                <td>@pet.Age</td>
+                <td>@pet.AdoptionType</td>
+                <!-- Add other columns as needed -->
+                <td><a asp-controller="Home" asp-action="Detail" asp-route-id="@pet.Id">Details</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
